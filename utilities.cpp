@@ -1,8 +1,16 @@
 #include "utilities.h"
 #include <cstdio>
 #include <algorithm>
-
 Triple::Triple(int a,int b,int c):s1(a),s2(b),max(c){}
+
+
+pii random_pair(int n){
+	int i1 = rand()%n;
+	int i2;
+	while((i2 = rand()%n) == i1);
+	return std::make_pair(i1,i2);
+}
+int random_int(int n){ return rand() % n; }
 
 Triple lcs(const int *tab1,const int *tab2){
 	int A[N+1][N+1];
@@ -23,4 +31,14 @@ Triple lcs(const int *tab1,const int *tab2){
                     A[i][j] = 0;
             }
     return Triple(ind1,ind2,max);
+}
+void build_permutation(int* per){
+	for(int i = 0;i<N;i++) per[i] = i+1;
+	permutate(per);
+}
+void permutate(int* per){
+	for(int k=N;k>=2;k--){
+		int l = rand()%k;
+		std::swap(per[l],per[k-1]);
+	}
 }

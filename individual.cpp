@@ -40,4 +40,10 @@ void Individual::fill_identity(){
 bool Individual::operator < (const Individual& a) const{
     return value < a.value;
 }
+void Individual::print()const{
+	printf("IND val: %d, Order: ",value);
+	REP(i,0,N)
+		printf("%d ",order[i]);
 
+	printf("\n");
+}

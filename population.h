@@ -5,18 +5,15 @@
 class Population{
 	public:
 	std::vector<Individual*> population;
-	int best_of_all_value;
-	int generation_number;
+	int best_of_all_value,generation_number,distances[N][N];
 	int* best_order;
-	int distances[N][N];
-	int permutation[N];
-
-	void build_permutation();
+	
+	void init();
 	void read_distances();
 	void print_distances();
-	void permutate();
 	int count_individual_value(int);	
 	Population();
+	
 	//	Run once, at the beginning. Fills vector population with random individuals
 	void populate();
 	
@@ -38,7 +35,7 @@ class Population{
 	//FILL
 	void print_best();
 
-	//FILL!	
+	//	prints every individual
 	void print_population();
 	
 	//FILL!
