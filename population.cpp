@@ -4,9 +4,13 @@
 #include "population.h"
 
 Population::Population(){
-	best_order = NULL;
+	best_order.clear();
 	generation_number = 0;
 	best_of_all_value = 2000000000;
+}
+Population::~Population(){
+    for(Individual* individual : population) delete(individual);
+    population.clear();
 }
 void Population::init(){
 	read_distances();
@@ -30,40 +34,49 @@ void Population::make_new_generation(){
 		count_individual_value(population.size()-1);
     }
 	generation_number++;
+    sort_population();
+    eliminate_weakest();
 }
-void Population::mutate_population(){ 	REP(i,0,MUTATION_SIZE) population[random_int(POPULATION)]->mutate(); }
-void Population::populate(){ 			REP(i,0,POPULATION) population.push_back(Individual::create_random_individual()); }
+void Population::mutate_population(){
+    REP(i,0,MUTATION_SIZE) population[random_int(POPULATION)]->mutate(); 
+}
+void Population::populate(){ 			
+    REP(i,0,POPULATION) population.push_back(Individual::create_random_individual()); 
+    REP(i,0,POPULATION) count_individual_value(i);
+}
 
 void Population::sort_population(){
 	int k = population.size();
 	REP(i,0,k) count_individual_value(i); 
 
-	sort(population.begin(),population.end());
+	sort(population.begin(),population.end(),compare);
 	save_best();
 }
 void Population::save_best(){
 	if(population[0]->value < best_of_all_value){
 		best_of_all_value = population[0]->value;
-		if(best_order != NULL) delete(best_order);
-		best_order = new int(N);
-		REP(i,0,N) best_order[i] = population[0]->order[i];
+		best_order.clear();
+        REP(i,0,N) best_order.push_back(population[0]->order[i]);
 	}
 }
 void Population::eliminate_weakest(){
 	sort_population();
-	for(auto i = population.begin()+POPULATION; i != population.end(); i++) delete(*i);
-    population.erase(population.begin()+POPULATION,population.end());
+    for(auto i = population.begin()+POPULATION; i != population.end(); i++) delete(*i);
 	population.resize(POPULATION);
 }
 
-int Population::give_best_of_all(){ return best_of_all_value; }
-int* Population::give_best_array(){ return best_order; }
+void Population::print_best_of_all(){ printf("BEST OF ALL: %d\n",best_of_all_value); }
+void Population::print_best_order(){ 
+    printf("BEST ORDER: ");
+    for(int v : best_order) printf("%d ",v);
+    printf("\n");
+}
 
 void Population::read_distances(){	REP(i,0,N) REP(j,0,N) scanf("%d", &distances[i][j]); }
 void Population::print_distances(){ REP(i,0,N) REP(j,0,N) printf("%d ", distances[i][j]); }
 
 void Population::print_best(){ printf("After %d generations: %d\n", generation_number,population[0]->value); }
-void Population::print_population(){ for(auto individual : population) individual->print(); }
+void Population::print_population(){ for(Individual* individual : population) individual->print(); }
 
 int Population::count_individual_value(int index){
 	Individual* in = population[index];

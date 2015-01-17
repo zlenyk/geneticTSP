@@ -6,14 +6,14 @@ class Population{
 	public:
 	std::vector<Individual*> population;
 	int best_of_all_value,generation_number,distances[N][N];
-	int* best_order;
+	std::vector<int> best_order;
 	
 	void init();
 	void read_distances();
 	void print_distances();
 	int count_individual_value(int);	
 	Population();
-	
+    ~Population();	
 	//	Run once, at the beginning. Fills vector population with random individuals
 	void populate();
 	
@@ -40,8 +40,11 @@ class Population{
 	
 	//FILL!
 	void save_best();
-	int* give_best_array();
-	int give_best_of_all();
+	void print_best_order();
+	void print_best_of_all();
 
+    static bool compare(const Individual* a,const Individual* b){
+        return a->value < b->value;
+    }
 };
 #endif

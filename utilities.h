@@ -1,6 +1,7 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 #include "configuration.h"
+#include <time.h>
 #include <utility>
 struct Triple{
 	int s1,s2,max;

@@ -1,8 +1,8 @@
 CXXFLAGS =	-o -g -Wall -std=c++0x
 
-OBJS =	main.o population.o individual.o utilities.o
+OBJS =	main.o population.o individual.o utilities.o configuration.h
 TARGET = tsp
-TEST = tests/distances12.in
+TEST = tests/distances30.in
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS)
