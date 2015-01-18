@@ -75,11 +75,11 @@ void Population::print_best_order(){
 void Population::read_distances(){	REP(i,0,N) REP(j,0,N) scanf("%d", &distances[i][j]); }
 void Population::print_distances(){ REP(i,0,N) REP(j,0,N) printf("%d ", distances[i][j]); }
 
-void Population::print_best(){ printf("After %d generations: %d\n", generation_number,population[0]->value); }
+void Population::print_best(){ printf("After %d generations: %d Best of all: %d\n", generation_number,population[0]->value,best_of_all_value); }
 void Population::print_population(){ for(Individual* individual : population) individual->print(); }
 
 int Population::count_individual_value(int index){
-	Individual* in = population[index];
+    Individual* in = population[index];
     int v = 0;
     REP(i,0,N) v += distances[in->order[i]-1][in->order[(i+1)%N]-1];
     in->value = v;

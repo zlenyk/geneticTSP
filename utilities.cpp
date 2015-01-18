@@ -5,9 +5,9 @@ Triple::Triple(int a,int b,int c):s1(a),s2(b),max(c){}
 
 
 pii random_pair(int n){
-	int i1 = rand()%n;
+	int i1 = rand()%(n);
 	int i2;
-	while((i2 = rand()%n) == i1);
+	while((i2 = rand()%(n)) == i1);
 	return std::make_pair(i1,i2);
 }
 int random_int(int n){ return rand() % n; }
