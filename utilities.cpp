@@ -33,12 +33,12 @@ Triple lcs(const int *tab1,const int *tab2){
     }
     return Triple(ind1,ind2,max);
 }
-void build_permutation(int* per){
-	for(int i = 0;i<N;i++) per[i] = i+1;
-	permutate(per);
+void build_permutation(int* per,int n){
+	for(int i = 0;i<n;i++) per[i] = i+1;
+	permutate(per,n);
 }
-void permutate(int* per){
-	for(int k=N;k>=2;k--){
+void permutate(int* per,int n){
+	for(int k=n;k>=2;k--){
 		int l = rand()%k;
 		std::swap(per[l],per[k-1]);
 	}

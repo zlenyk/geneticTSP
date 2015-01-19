@@ -27,15 +27,19 @@ Individual* Population::cross(const Individual* mother,const Individual* father)
     return new_ind;
 }
 void Population::make_new_generation(){
-    for(int i = 0; i<POPULATION; i++){
-        pii random = random_pair(POPULATION);
-		Individual* n = cross(population[random.first],population[random.second]);
+    int* indOrder = new int[POPULATION];
+    build_permutation(indOrder,POPULATION);
+    for(int i = 0; i<POPULATION/2; i++){
+        //pii random = random_pair(POPULATION);
+        Individual* n = cross(population[indOrder[2*i]],population[indOrder[2*i+1]]);
 		population.push_back(n);
 		count_individual_value(population.size()-1);
     }
 	generation_number++;
     sort_population();
     eliminate_weakest();
+    
+    delete(indOrder);
 }
 void Population::mutate_population(){
     REP(i,0,MUTATION_SIZE) population[random_int(POPULATION)]->mutate(); 
@@ -61,7 +65,7 @@ void Population::save_best(){
 }
 void Population::eliminate_weakest(){
 	sort_population();
-    for(auto i = population.begin()+POPULATION; i != population.end(); i++) delete(*i);
+    for(auto i = population.begin()+(3*POPULATION)/2; i != population.end(); i++) delete(*i);
 	population.resize(POPULATION);
 }
 

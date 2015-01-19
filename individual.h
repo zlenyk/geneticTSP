@@ -15,7 +15,7 @@ class Individual{
         
 		static Individual* create_random_individual(){
 			Individual* new_ind = new Individual();
-			build_permutation(new_ind->order);
+			build_permutation(new_ind->order,N);
 			return new_ind;
 		}
 };

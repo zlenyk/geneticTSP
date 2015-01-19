@@ -13,9 +13,10 @@ Triple lcs(const int* a,const int* b);
 //	returns pair of random,distinct integers not higher than n
 pii random_pair(int);
 //	given array of permutation and it's size, permutates it
-void permutate(int*);
+void permutate(int*,int);
+
 //	fills array with random permutation 1...N
-void build_permutation(int*);
+void build_permutation(int*,int);
 //	returns random int not higher than argument
 int random_int(int);
 #endif
