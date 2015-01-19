@@ -5,15 +5,15 @@ Triple::Triple(int a,int b,int c):s1(a),s2(b),max(c){}
 
 
 pii random_pair(int n){
-	int i1 = rand()%(n);
-	int i2;
-	while((i2 = rand()%(n)) == i1);
-	return std::make_pair(i1,i2);
+    int i1 = rand()%(n);
+    int i2;
+    while((i2 = rand()%(n)) == i1);
+    return std::make_pair(i1,i2);
 }
 int random_int(int n){ return rand() % n; }
 
 Triple lcs(const int *tab1,const int *tab2){
-	int A[N+1][N+1];
+    int A[N+1][N+1];
     int ind1,ind2,max=-1;
     for(int i=0;i<N+1;i++) A[0][i] = A[i][0] = 0;
         
@@ -34,12 +34,12 @@ Triple lcs(const int *tab1,const int *tab2){
     return Triple(ind1,ind2,max);
 }
 void build_permutation(int* per,int n){
-	for(int i = 0;i<n;i++) per[i] = i+1;
-	permutate(per,n);
+    for(int i = 0;i<n;i++) per[i] = i+1;
+    permutate(per,n);
 }
 void permutate(int* per,int n){
-	for(int k=n;k>=2;k--){
-		int l = rand()%k;
-		std::swap(per[l],per[k-1]);
-	}
+    for(int k=n;k>=2;k--){
+        int l = rand()%k;
+        std::swap(per[l],per[k-1]);
+    }
 }

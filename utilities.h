@@ -4,19 +4,19 @@
 #include <time.h>
 #include <utility>
 struct Triple{
-	int s1,s2,max;
-	Triple(int,int,int);
+    int s1,s2,max;
+    Triple(int,int,int);
 };
 
 Triple lcs(const int* a,const int* b);
 
-//	returns pair of random,distinct integers not higher than n
+//  returns pair of random,distinct integers not higher than n
 pii random_pair(int);
-//	given array of permutation and it's size, permutates it
+//  given array of permutation and it's size, permutates it
 void permutate(int*,int);
 
-//	fills array with random permutation 1...N
+//  fills array with random permutation 1...N
 void build_permutation(int*,int);
-//	returns random int not higher than argument
+//  returns random int not higher than argument
 int random_int(int);
 #endif
